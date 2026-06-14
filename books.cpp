@@ -30,38 +30,56 @@ using namespace std;
 
 
 // prefix sum + binary search
+// void solve() {
+//     ll n, t; cin >> n >> t;
+//     vector<ll> a(n+1, 0);
+//     for(ll i = 1; i <= n; i++) cin >> a[i];
+
+//     vector<ll> pre(n+1, 0);
+//     for(ll i = 1; i <= n; i++) {
+//         pre[i] = a[i]+pre[i-1];
+//     }
+
+//     ll ans = 0;
+
+//     for(ll i = 1; i <= n; i++) {
+//         ll low = i, high = n, best = i - 1;
+
+//         while(low <= high) {
+//             ll mid = low + (high - low + 1) / 2;
+
+//             ll sum = pre[mid] - pre[i-1];
+
+//             if(sum <= t) {
+//                 best = mid;
+//                 low = mid + 1;
+//             } else {
+//                 high = mid - 1;
+//             }
+//         }
+//         ans = max(ans, best - i + 1);
+//     }
+//     cout << ans << endl;
+// }
+
 void solve() {
     ll n, t; cin >> n >> t;
-    vector<ll> a(n+1, 0);
-    for(ll i = 1; i <= n; i++) cin >> a[i];
+    vector<ll> a(n);
+    for(auto& i : a) cin >> i;
 
-    vector<ll> pre(n+1, 0);
-    for(ll i = 1; i <= n; i++) {
-        pre[i] = a[i]+pre[i-1];
-    }
+    ll curr_sum = 0, ans = 0, l = 0, r = 0;
 
-    ll ans = 0;
-
-    for(ll i = 1; i <= n; i++) {
-        ll low = i, high = n, best = i - 1;
-
-        while(low <= high) {
-            ll mid = low + (high - low + 1) / 2;
-
-            ll sum = pre[mid] - pre[i-1];
-
-            if(sum <= t) {
-                best = mid;
-                low = mid + 1;
-            } else {
-                high = mid - 1;
-            }
+    while(r < n) {
+        curr_sum += a[r];
+        while(curr_sum > t) {
+            curr_sum -= a[l];
+            l++;
         }
-        ans = max(ans, best - i + 1);
+        ans = max(ans, r - l + 1);
+        r++;
     }
     cout << ans << endl;
 }
-
 
 int main() {
     ios_base::sync_with_stdio(false);

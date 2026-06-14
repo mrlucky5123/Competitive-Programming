@@ -3,28 +3,47 @@
 #define endl '\n'
 using namespace std;
 
-void solve() {
-    ll n, x; 
-    cin >> n >> x;
+// void solve() {
+//     ll n, x; 
+//     cin >> n >> x;
 
+//     vector<ll> a(n);
+//     ll cnt_even = 0, cnt_odd = 0;
+//     for(ll i = 0; i < n; i++) {
+//         cin >> a[i];
+//         if(a[i]&1) cnt_odd++;
+//         else cnt_even++;
+//     }
+
+//     bool possible = false;
+
+//     for(ll i = 1; i <= cnt_odd && i <= x; i += 2) {
+//         if(cnt_even >= x - i) {
+//             possible = true;
+//             break;
+//         }
+//     }
+//     if(possible) cout << "Yes" << endl;
+//     else cout << "No" << endl;
+// }
+
+void solve() {
+    ll n, x; cin >> n >> x;
     vector<ll> a(n);
-    ll cnt_even = 0, cnt_odd = 0;
+    ll cnt_odd = 0, cnt_even = 0;
     for(ll i = 0; i < n; i++) {
         cin >> a[i];
         if(a[i]&1) cnt_odd++;
         else cnt_even++;
     }
 
-    bool possible = false;
-
-    for(ll i = 1; i <= cnt_odd && i <= x; i += 2) {
-        if(cnt_even >= x - i) {
-            possible = true;
-            break;
+    for(ll k = 1; k <= x && k <= cnt_odd; k+=2) {
+        if(cnt_even >= x - k) {
+            cout << "YES" << endl;
+            return;
         }
     }
-    if(possible) cout << "Yes" << endl;
-    else cout << "No" << endl;
+    cout << "NO" << endl;
 }
 
 int main() {

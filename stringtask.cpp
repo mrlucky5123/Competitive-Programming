@@ -3,27 +3,42 @@
 #define endl '\n'
 using namespace std;
 
-bool check_vowel(char c) {
-    c = tolower(c);
-    return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' || c == 'y';
-}
+// bool check_vowel(char c) {
+//     c = tolower(c);
+//     return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' || c == 'y';
+// }
 
 // .c.d.f.r.c.s
 
 // .x.n.h.c.g.t.n.q.c.m
 
 
+// void solve() {
+//     string s;
+//     cin >> s;
+
+//     string ans = "";
+//     for(char &c : s) {
+//         if(check_vowel(c)) {
+//             continue;
+//         } else {
+//             ans += '.';
+//             ans += tolower(c);
+//         }
+//     }
+//     cout << ans << endl;
+// }
+
 void solve() {
-    string s;
-    cin >> s;
+    string s; cin >> s;
+    for(char& c : s) c = tolower(c);
 
     string ans = "";
-    for(char &c : s) {
-        if(check_vowel(c)) {
-            continue;
-        } else {
+    for(auto& c : s) {
+        if(c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' || c == 'y') continue;
+        else {
             ans += '.';
-            ans += tolower(c);
+            ans += c;
         }
     }
     cout << ans << endl;
